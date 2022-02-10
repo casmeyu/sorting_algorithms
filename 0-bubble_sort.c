@@ -1,8 +1,10 @@
 #include "sort.h"
 #include <stdio.h>
 /**
- * bubble_sort - sorts a list in ascending order using the
- * bubble sort algorithm
+ * bubble_sort - sorts a list in ascending order using bubble sort algorithm.
+ *
+ * It goes comparing one element with the previous and swaps them
+ * if neccesary, and then repeats the process until no changes are done.
  *
  * @array: an array of integers
  * @size: size of the array
@@ -11,8 +13,6 @@ void bubble_sort(int *array, size_t size)
 {
 	size_t i;
 	int aux, end = 0;
-
-	printf("size: %ld\n", size);
 
 	while (end == 0)
 	{
