@@ -10,37 +10,41 @@
  */
 void insertion_sort_list(listint_t **list)
 {
-	listint_t *tmp;
-	int end = 0;
-/*
-	if (!(*list) || !(*list)->next)
-		return (void);
-*/
-	printf("assigned tmp\n");
-	while (end == 0)
-	{
-		tmp = (*list)->next;
-		while (tmp)
-		{
-			end = 1;
-			if (tmp->n < tmp->prev->n)
-			{
-				end = 0;
-				tmp->prev->next = tmp->next;
-				tmp->next->prev = tmp->prev;
-/*				printf("changed around node\n");*/
-				if (tmp->prev->prev)
-					tmp->prev->prev->next = tmp;
-				printf("1\n");
-				tmp->next = tmp->prev;
-			
-				print_list(*list);/*
-				printf("changed node");*/
+	listint_t *tmp, *aux;
 
-				break;
-			}
-			tmp = tmp->next;
+	if (!(*list) || !(*list)->next)
+		return;
+
+	tmp = (*list)->next;
+	aux = tmp;
+
+	while (tmp)
+	{
+		printf("Entered while with: %d\n", tmp->n);
+		aux = tmp->next;
+		while (tmp->n < tmp->prev->n && tmp->prev)
+		{
+			printf("%d is less than %d\n", tmp->n, tmp->prev->n);
+			/* change around node */
+			printf("changing around node\n");
+			tmp->prev->next = tmp->next;
+			print_list(*list);
+			tmp->next->prev = tmp->prev;
+
+			/* change node position */
+			printf("changing node position\n");
+			
+			tmp->prev = tmp->prev->prev;
+			tmp->next = tmp->prev->next;
+			
+			printf("putting myself int\n");
+			tmp->prev->next = tmp;
+
+			tmp->next->prev = tmp;
+			print_list(*list);
+			tmp = aux;
 		}
+		tmp = tmp->next;
 	}
 
 }
