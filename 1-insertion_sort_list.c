@@ -28,19 +28,22 @@ void insertion_sort_list(listint_t **list)
 			/* change around node */
 			printf("changing around node\n");
 			tmp->prev->next = tmp->next;
-			print_list(*list);
 			tmp->next->prev = tmp->prev;
+			print_list(*list);
 
 			/* change node position */
 			printf("changing node position\n");
-			
-			tmp->prev = tmp->prev->prev;
-			tmp->next = tmp->prev->next;
-			
-			printf("putting myself int\n");
-			tmp->prev->next = tmp;
 
+			tmp->next = tmp->prev;
+			tmp->prev = tmp->next->prev;
+
+			printf("putting myself int\n");
 			tmp->next->prev = tmp;
+			printf("putting next in\n");
+			if (tmp->prev)
+				tmp->prev->next = tmp;
+			else
+				*list = tmp;
 			print_list(*list);
 			tmp = aux;
 		}
