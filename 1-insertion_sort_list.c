@@ -1,7 +1,7 @@
 #include "sort.h"
 #include <stdio.h>
 /**
- * insertion_sort_list - sorts a ddouble linked list using insertion sort algorightm
+ * insertion_sort_list - sorts a ddouble linked list with insertion sort algo
  *
  * It goes element by element comparing it with the previous one.
  * if it is smaller it swaps them
@@ -20,34 +20,34 @@ void insertion_sort_list(listint_t **list)
 
 	while (tmp)
 	{
-		printf("Entered while with: %d\n", tmp->n);
-		aux = tmp->next;
-		while (tmp->n < tmp->prev->n && tmp->prev)
+		if (tmp->prev && tmp->n < tmp->prev->n)
 		{
-			printf("%d is less than %d\n", tmp->n, tmp->prev->n);
-			/* change around node */
-			printf("changing around node\n");
-			tmp->prev->next = tmp->next;
-			tmp->next->prev = tmp->prev;
-			print_list(*list);
+			aux = tmp->next;
+			while (tmp->prev && tmp->n < tmp->prev->n)
+			{
+				/* change around node */
+				tmp->prev->next = tmp->next;
+				if (tmp->next)
+					tmp->next->prev = tmp->prev;
 
-			/* change node position */
-			printf("changing node position\n");
+				/* change node position */
+				tmp->next = tmp->prev;
+				if (tmp->next)
+				{
+					tmp->prev = tmp->next->prev;
+					tmp->next->prev = tmp;
+				}
+				if (tmp->prev)
+					tmp->prev->next = tmp;
+				else
+					*list = tmp;
+				print_list(*list);
 
-			tmp->next = tmp->prev;
-			tmp->prev = tmp->next->prev;
-
-			printf("putting myself int\n");
-			tmp->next->prev = tmp;
-			printf("putting next in\n");
-			if (tmp->prev)
-				tmp->prev->next = tmp;
-			else
-				*list = tmp;
-			print_list(*list);
+			}
 			tmp = aux;
 		}
-		tmp = tmp->next;
-	}
+		else
+			tmp = tmp->next;
 
+	}
 }
