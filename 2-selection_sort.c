@@ -1,5 +1,5 @@
 #include "sort.h"
-#include <stdio.h>
+
 /**
  * selection_sort - sort an array of integers with sort insert
  *
