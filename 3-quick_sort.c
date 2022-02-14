@@ -1,11 +1,15 @@
 #include "sort.h"
 /**
- * div_and_conquer - takes pivot, finds places and divdes array
+ * quick_partition - sorts the array comparing it with a pivot
+ *     smaller than the pivot go to the left
+ *     and greater than the pivot go to the right
+ *
  * @array: array pointer
- * @first: first pos element of array
- * @last: last element of array
+ * @low: first pos element of array
+ * @high: last element of array
  * @size: size of array to print it
- * Return: position index of pivot
+ *
+ * Return: index of the pivot after sort
  */
 size_t quick_partition(int *array, size_t low, size_t high, size_t size)
 {
