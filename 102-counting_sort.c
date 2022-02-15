@@ -12,7 +12,7 @@ void counting_sort(int *array, size_t size)
 	size_t idx, max;
 	int *keys, *final;
 
-	if (!array || size < 2)
+	if (!array || !(*array) || size < 2)
 		return;
 
 	max = array[0];
@@ -20,7 +20,7 @@ void counting_sort(int *array, size_t size)
 		if ((int)max < array[idx])
 			max = array[idx] + 1;
 
-	keys = malloc((max) * sizeof(*keys));
+	keys = malloc((max + 1) * sizeof(*keys));
 	if (!keys)
 		return;
 
@@ -42,7 +42,11 @@ void counting_sort(int *array, size_t size)
 
 	for (idx = 0; idx < size; idx++)
 		if (keys[array[idx]] > 0)
+		{
 			final[keys[array[idx]] - 1] = array[idx];
+			keys[array[idx]] -= 1;
+		}
+	
 
 	for (idx = 0; idx < size; idx++)
 		array[idx] = final[idx];
