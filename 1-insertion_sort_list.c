@@ -34,12 +34,11 @@ void insertion_sort_list(listint_t **list)
 			{
 				tmp->prev = tmp->next->prev;
 				tmp->next->prev = tmp;
-			}	
+			}
 			if (tmp->prev)
 				tmp->prev->next = tmp;
 			else
 				(*list) = tmp;
-			
 
 			print_list(*list);
 
