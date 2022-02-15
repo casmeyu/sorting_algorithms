@@ -24,6 +24,9 @@ void counting_sort(int *array, size_t size)
 	if (!keys)
 		return;
 
+	for (idx = 0; idx < max; idx++)
+		keys[idx] = 0;
+
 	for (idx = 0; idx < size; idx++)
 		keys[array[idx]] += 1;
 
