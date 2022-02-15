@@ -9,39 +9,32 @@
  */
 void shell_sort(int *array, size_t size)
 {
-	size_t idx, gap = 1;
-	int aux, flag = 1;
+	size_t idx, idx_g, gap = 1;
+	int aux;
 
-	if (size < 2)
+	if (!array || size < 2)
 		return;
 
-	(void) array;
 	/* calculate Knuth's gap */
-	while (gap < size)
+	while (gap < size / 3)
 		gap = (gap * 3) + 1;
 
-	if ((gap / 3) >= 1)
-		gap /= 3;
-
-	while (flag == 1)
+	while (gap > 0)
 	{
-		flag = 0;
 		for (idx = gap; idx < size; idx++)
 		{
-			if (array[idx - gap] > array[idx])
+			aux = array[idx];
+			idx_g = idx;
+			while (idx_g >= gap && array[idx_g - gap] > aux)
 			{
-				aux = array[idx];
-				array[idx] = array[idx - gap];
-				array[idx - gap] = aux;
-				flag = 1;
+				array[idx_g] = array[idx_g - gap];
+				idx_g -= gap;
 			}
+
+			array[idx_g] = aux;
 		}
 
-		if ((gap / 3) >= 1)
-		{
-			gap /= 3;
-			print_array(array, size);
-		}
+		print_array(array, size);
+		gap = (gap - 1) / 3;
 	}
-	print_array(array, size);
 }
