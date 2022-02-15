@@ -35,8 +35,10 @@ void counting_sort(int *array, size_t size)
 
 	final = malloc(size * sizeof(*final));
 	if (!final)
+	{
 		free(keys);
 		return;
+	}
 
 	for (idx = 0; idx < size; idx++)
 		if (keys[array[idx]] > 0)
