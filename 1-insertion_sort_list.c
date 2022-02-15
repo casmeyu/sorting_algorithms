@@ -20,34 +20,29 @@ void insertion_sort_list(listint_t **list)
 
 	while (tmp)
 	{
-		if (tmp->prev && tmp->n < tmp->prev->n)
+		aux = tmp->next;
+		while (tmp->prev && tmp->n < tmp->prev->n)
 		{
-			aux = tmp->next;
-			while (tmp->prev && tmp->n < tmp->prev->n)
+			/* change around node */
+			tmp->prev->next = tmp->next;
+			if (tmp->next)
+				tmp->next->prev = tmp->prev;
+
+			/* change node position */
+			tmp->next = tmp->prev;
+			if (tmp->next)
 			{
-				/* change around node */
-				tmp->prev->next = tmp->next;
-				if (tmp->next)
-					tmp->next->prev = tmp->prev;
-
-				/* change node position */
-				tmp->next = tmp->prev;
-				if (tmp->next)
-				{
-					tmp->prev = tmp->next->prev;
-					tmp->next->prev = tmp;
-				}
-				if (tmp->prev)
-					tmp->prev->next = tmp;
-				else
-					*list = tmp;
-				print_list(*list);
-
+				tmp->prev = tmp->next->prev;
+				tmp->next->prev = tmp;
 			}
-			tmp = aux;
+			if (tmp->prev)
+				tmp->prev->next = tmp;
+			else
+				*list = tmp;
+			print_list(*list);
+
 		}
-		else
-			tmp = tmp->next;
+		tmp = aux;
 
 	}
 }
